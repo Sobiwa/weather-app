@@ -3,6 +3,7 @@ const countrySelectLabel = document.createElement("label");
 const countrySelect = document.createElement("input");
 const countries = document.createElement("datalist");
 countrySelectLabel.setAttribute("for", "country-select");
+countrySelectLabel.innerText = 'Country';
 countrySelect.setAttribute("type", "text");
 countrySelect.setAttribute("name", "country-select");
 countrySelect.setAttribute("id", "country-select");

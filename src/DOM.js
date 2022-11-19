@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-syntax */
+import settings from './settings.js';
 import sun from "./img/sun.svg";
 import clearNight from "./img/clear-night.svg";
 import partialClouds from "./img/partial-clouds.svg";
@@ -10,7 +11,12 @@ import sunRain from "./img/sun-rain.svg";
 import thunder from "./img/thunder.svg";
 import snow from "./img/snow.svg";
 import mist from "./img/mist.svg";
+
 import magGlass from "./img/magnify.svg";
+import cog from "./img/cog-outline.svg";
+
+const settingsContainer = document.querySelector('.settings-container');
+settingsContainer.appendChild(settings);
 
 const gradientDay = document.createElement("div");
 gradientDay.classList.add("gradient", "day");
@@ -32,7 +38,6 @@ document.body.append(
 
 const gradients = document.querySelectorAll(".gradient");
 const gradientsArray = [...gradients];
-console.log(gradientsArray);
 
 const currentWeatherContainer = document.querySelector(".current-weather");
 const forecastContainer = document.querySelector(".forecast");
@@ -41,6 +46,17 @@ const searchIcon = document.querySelector(".search-icon");
 const searchIconImage = new Image();
 searchIconImage.src = magGlass;
 searchIcon.appendChild(searchIconImage);
+
+const cogIcon = document.querySelector(".cog-icon");
+const cogIconImage = new Image();
+cogIconImage.src = cog;
+cogIcon.appendChild(cogIconImage);
+
+const cogIconContainer = document.querySelector('.cog-icon-container');
+const settingsSlide = document.querySelector('.settings');
+cogIconContainer.addEventListener('click', () => {
+  settingsSlide.classList.toggle('hidden');
+})
 
 function selectIcon(code) {
   let source;

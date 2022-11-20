@@ -8,7 +8,7 @@ const suggestionBox = document.querySelector(".suggestion-box-container");
 async function findLocation() {
   const country = document.getElementById("country-select");
   const state = document.getElementById("states-select");
-  const prefix = "http://api.openweathermap.org/geo/1.0/";
+  const prefix = "https://api.openweathermap.org/geo/1.0/";
   const input = locInput.value;
   let middle;
   const apiKey = "&appid=921cfd876fc7bdd1768497c18dc1bf81";

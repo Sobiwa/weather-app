@@ -1,6 +1,6 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
-import { isSameDay, parseISO, getDay, isToday } from "date-fns";
+import { isSameDay, parseISO, getDay, isToday, fromUnixTime, format } from "date-fns";
 
 export default async function retrieveWeatherData({ lat, lon }) {
   // const fetchPrefix = 'https://api.openweathermap.org/data/2.5/weather?zip=';
@@ -16,6 +16,8 @@ export default async function retrieveWeatherData({ lat, lon }) {
   );
   data.current = await currentWeather.json();
   data.fiveDay = await fiveDayWeather.json();
+  data.current.sunrise = format(fromUnixTime(data.current.sys.sunrise), 'p');
+  data.current.sunset = format(fromUnixTime(data.current.sys.sunset), 'p');
   data.forecast = analyzeForecast(data.fiveDay);
   return data;
 }

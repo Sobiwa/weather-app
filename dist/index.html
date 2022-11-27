@@ -7,24 +7,26 @@
   <title>Weather App</title>
 <script defer src="bundle.js"></script></head>
 <body>
-  <form class="location-input">
-    <ul>
-      <li class="loc-input-field">
-        <label for="loc"></label>
-        <input type="text" id="loc" placeholder="city or zip">
-        <span class="suggestion-box-container"></span>
-        <span class="search-icon"></span>
-      </li>
-    </ul>
-  </form>
-  <div class="settings hidden">
-    <div class="cog-icon-container">
-      <div class="cog-icon"></div>
+  <div class="site-wrapper">
+    <form class="location-input">
+      <ul>
+        <li class="loc-input-field">
+          <label for="loc"></label>
+          <input type="text" id="loc" placeholder="city or zip">
+          <span class="suggestion-box-container"></span>
+          <span class="search-icon"></span>
+        </li>
+      </ul>
+    </form>
+    <div class="settings hidden">
+      <div class="cog-icon-container">
+        <div class="cog-icon"></div>
+      </div>
+      <div class="settings-container">
+      </div>
     </div>
-    <div class="settings-container">
-    </div>
+    <div class="current-weather"></div>
+    <div class="forecast"></div>
   </div>
-  <div class="current-weather"></div>
-  <div class="forecast"></div>
 </body>
 </html>

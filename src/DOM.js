@@ -35,7 +35,8 @@ const gradientNight = document.createElement("div");
 gradientNight.classList.add("gradient", "night");
 const gradientNightCloud = document.createElement("div");
 gradientNightCloud.classList.add("gradient", "night-cloud");
-document.body.append(
+const siteWrapper = document.querySelector('.site-wrapper');
+siteWrapper.append(
   gradientDay,
   gradientCloud,
   gradientRain,
@@ -266,9 +267,9 @@ function renderCurrentWeather({ current }) {
 
   const background = selectBackground(current.weather[0].icon);
   if (background === gradientCloud) {
-    document.body.className = "cloud";
+    siteWrapper.className = "site-wrapper cloud";
   } else {
-    document.body.className = "";
+    siteWrapper.className = "site-wrapper";
   }
   for (const gradient of gradientsArray) {
     if (background === gradient) {

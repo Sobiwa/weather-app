@@ -66,6 +66,7 @@ function createOptionBox(response) {
       weatherData.current.locationName = sug.name;
       console.log(weatherData);
       suggestionBox.removeChild(suggestionBox.firstChild);
+      locInput.value = '';
       renderWeatherDetails(weatherData);
     });
     box.appendChild(suggestion);

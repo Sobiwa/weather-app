@@ -1,35 +1,7 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
-import { isSameDay, parseISO, getDay, isToday, fromUnixTime, format } from "date-fns";
+import { isSameDay, parseISO, getDay, isToday, fromUnixTime, format } from 'date-fns';
 import renderWeatherDetails from './DOM';
-
-async function retrieveWeatherData({ lat, lon }) {
-
-  const unitsToggle = document.querySelector('#units-toggle');
-
-  const data = {};
-  const fetchPrefix = "https://api.openweathermap.org/data/2.5/";
-  const middle = `lat=${lat}&lon=${lon}`;
-  const fetchSuffix = `&appid=921cfd876fc7bdd1768497c18dc1bf81&units=${unitsToggle.checked ? 'metric' : 'imperial'}`;
-  const currentWeather = await fetch(
-    `${fetchPrefix}/weather?${middle}${fetchSuffix}`
-  );
-  const fiveDayWeather = await fetch(
-    `${fetchPrefix}/forecast?${middle}${fetchSuffix}`
-  );
-  data.current = await currentWeather.json();
-  data.fiveDay = await fiveDayWeather.json();
-  data.current.sunrise = format(fromUnixTime(data.current.sys.sunrise), 'p');
-  data.current.sunset = format(fromUnixTime(data.current.sys.sunset), 'p');
-  data.forecast = analyzeForecast(data.fiveDay);
-  return data;
-}
-
-async function getAndDisplayWeather(locInfo) {
-  const weatherData = await retrieveWeatherData(locInfo);
-  weatherData.current.locationName = locInfo.name;
-  renderWeatherDetails(weatherData);
-}
 
 function findMostCommon(array) {
   let highestCount = 0;
@@ -49,32 +21,33 @@ function findMostCommon(array) {
   return mostCommon;
 }
 
+
 function translateDay(num) {
   let day;
   switch (num) {
     case 0:
-      day = "Sunday";
+      day = 'Sunday';
       break;
     case 1:
-      day = "Monday";
+      day = 'Monday';
       break;
     case 2:
-      day = "Tuesday";
+      day = 'Tuesday';
       break;
     case 3:
-      day = "Wednesday";
+      day = 'Wednesday';
       break;
     case 4:
-      day = "Thursday";
+      day = 'Thursday';
       break;
     case 5:
-      day = "Friday";
+      day = 'Friday';
       break;
     case 6:
-      day = "Saturday";
+      day = 'Saturday';
       break;
     default:
-      day = "no day";
+      day = 'no day';
   }
   return day;
 }
@@ -117,7 +90,7 @@ function analyzeForecast(data) {
       if (!maxTemp || threeHour.main.temp_max > maxTemp) {
         maxTemp = Math.floor(threeHour.main.temp_max);
       }
-      if (threeHour.weather[0].icon.includes("d")) {
+      if (threeHour.weather[0].icon.includes('d')) {
         description.push(threeHour.weather[0].description);
         icon.push(threeHour.weather[0].icon);
       }
@@ -131,6 +104,34 @@ function analyzeForecast(data) {
     };
   }
   return fiveDayForecast;
+}
+
+async function retrieveWeatherData({ lat, lon }) {
+
+  const unitsToggle = document.querySelector('#units-toggle');
+
+  const data = {};
+  const fetchPrefix = 'https://api.openweathermap.org/data/2.5/';
+  const middle = `lat=${lat}&lon=${lon}`;
+  const fetchSuffix = `&appid=921cfd876fc7bdd1768497c18dc1bf81&units=${unitsToggle.checked ? 'metric' : 'imperial'}`;
+  const currentWeather = await fetch(
+    `${fetchPrefix}/weather?${middle}${fetchSuffix}`
+  );
+  const fiveDayWeather = await fetch(
+    `${fetchPrefix}/forecast?${middle}${fetchSuffix}`
+  );
+  data.current = await currentWeather.json();
+  data.fiveDay = await fiveDayWeather.json();
+  data.current.sunrise = format(fromUnixTime(data.current.sys.sunrise), 'p');
+  data.current.sunset = format(fromUnixTime(data.current.sys.sunset), 'p');
+  data.forecast = analyzeForecast(data.fiveDay);
+  return data;
+}
+
+async function getAndDisplayWeather(locInfo) {
+  const weatherData = await retrieveWeatherData(locInfo);
+  weatherData.current.locationName = locInfo.name;
+  renderWeatherDetails(weatherData);
 }
 
 export default getAndDisplayWeather;

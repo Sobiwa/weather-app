@@ -47,9 +47,11 @@ function createOptionBox(response) {
   }
   const box = document.createElement("div");
   box.classList.add("suggestion-box");
-  // if (!Array.isArray(response)) {
-  //   response = [response];
-  // }
+
+  // zip response is not an array
+  if (!Array.isArray(response)) {
+    response = [response];
+  }
   if (!response.length) {
     const noResults = document.createElement("div");
     noResults.classList.add("loc-suggestion");

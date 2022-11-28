@@ -411,6 +411,25 @@ ul {
   margin: 15px 0 6px;
 }
 
+.reset {
+  display: flex;
+  flex-direction: column;
+}
+.reset button {
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100px;
+  appearance: none;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 20px;
+  background-color: rgb(170, 37, 37);
+  color: var(--plain);
+  margin: 5px 0;
+  align-self: flex-end;
+  line-height: 1.2rem;
+}
+
 .more-info {
   position: absolute;
   bottom: 20px;

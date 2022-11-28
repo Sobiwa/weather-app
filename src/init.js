@@ -5,7 +5,7 @@ import { unitsToggle } from './settings';
 const locInput = document.querySelector("#loc");
 
 export default function init() {
-  if (localStorage.length) {
+  if (localStorage.getItem('location')) {
     const location = JSON.parse(localStorage.getItem('location'));
     const units = localStorage.getItem('units');
     if (units === 'checked') {

@@ -81,7 +81,22 @@ unitsToggle.addEventListener('change', () => {
 settingsList.append(units);
 settings.append(settingsTitle, settingsList);
 
-settingsForm.append(advancedSearch, settings);
+const reset = document.createElement('div');
+reset.classList.add('reset');
+const resetTitle = document.createElement('h4');
+resetTitle.innerText = 'Reset';
+const resetDescription = document.createElement('p');
+resetDescription.innerText = 'Forget saved data for this site?';
+const resetButton = document.createElement('button');
+resetButton.innerText = 'Reset';
+resetButton.addEventListener('click', () => {
+  localStorage.removeItem('location');
+  localStorage.removeItem('units');
+  location.reload();
+});
+reset.append(resetTitle, resetDescription, resetButton);
+
+settingsForm.append(advancedSearch, settings, reset);
 
 export default settingsForm;
 export { unitsToggle };

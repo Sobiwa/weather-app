@@ -12,6 +12,12 @@ statesSelect.setAttribute('list', 'states');
 states.setAttribute('id', 'states');
 statesSelectInput.append(statesSelectLabel, statesSelect, states);
 
+statesSelect.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+  }
+});
+
 const statesList = {
   AL: 'Alabama',
   AK: 'Alaska',

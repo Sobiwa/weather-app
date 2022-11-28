@@ -92,6 +92,7 @@ resetButton.innerText = 'Reset';
 resetButton.addEventListener('click', () => {
   localStorage.removeItem('location');
   localStorage.removeItem('units');
+  // eslint-disable-next-line no-restricted-globals
   location.reload();
 });
 reset.append(resetTitle, resetDescription, resetButton);

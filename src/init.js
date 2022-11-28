@@ -1,8 +1,8 @@
-import { handleSearchInput } from "./locationSelect";
+import { handleSearchInput } from './locationSelect';
 import getAndDisplayWeather from './fetchWeather';
 import { unitsToggle } from './settings';
 
-const locInput = document.querySelector("#loc");
+const locInput = document.querySelector('#loc');
 
 export default function init() {
   if (localStorage.getItem('location')) {
@@ -13,7 +13,8 @@ export default function init() {
     }
     getAndDisplayWeather(location);
   }
-  locInput.addEventListener("input", () => {
+
+  locInput.addEventListener('input', () => {
     handleSearchInput();
   });
 
@@ -23,11 +24,11 @@ export default function init() {
     }
   });
 
-  window.addEventListener("resize", () => {
-    const moreInfoList = document.querySelector(".more-info-list");
+  window.addEventListener('resize', () => {
+    const moreInfoList = document.querySelector('.more-info-list');
     if (moreInfoList) {
       if (moreInfoList.style.maxHeight) {
-        moreInfoList.style.maxHeight = moreInfoList.scrollHeight + "px";
+        moreInfoList.style.maxHeight = `${moreInfoList.scrollHeight  }px`;
       }
     }
   });

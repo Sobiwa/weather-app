@@ -22,6 +22,8 @@ import sunriseIcon from "./img/weather-sunset-up.svg";
 import windIcon from "./img/weather-windy.svg";
 import cloudinessIcon from "./img/cloud-percent-outline.svg";
 
+let newPage = true;
+
 const settingsContainer = document.querySelector(".settings-container");
 settingsContainer.appendChild(settings);
 
@@ -232,6 +234,13 @@ function createMoreInfo(data) {
 }
 
 function renderCurrentWeather({ current }) {
+
+  if (newPage) {
+    const locationInput = document.querySelector(".location-input");
+    locationInput.classList.add("post");
+    newPage = false;
+  }
+
   const currentWeatherDisplay = document.createElement("div");
   currentWeatherDisplay.classList.add("current-weather-display");
 

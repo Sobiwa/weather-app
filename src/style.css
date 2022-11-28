@@ -104,8 +104,20 @@ body {
 
 .location-input {
   position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: min-content;
+  width: max-content;
+}
+
+.location-input.post {
   top: 8px;
   left: 8px;
+  bottom: auto;
+  right: auto;
   display: flex;
   justify-content: center;
   z-index: 1;
@@ -132,15 +144,19 @@ ul {
 }
 
 .loc-input-field {
+  min-width: 150px;
   position: relative;
+  transition: all 0.3s;
+}
+
+.location-input.post .loc-input-field {
   min-width: 30px;
   container-type: inline-size;
-  transition: all 0.3s;
   opacity: 0.3;
 }
 
-.loc-input-field:hover,
-.loc-input-field:has(#loc:focus) {
+.location-input.post .loc-input-field:hover,
+.location-input.post .loc-input-field:has(#loc:focus) {
   min-width: 150px;
   opacity: 1;
 }

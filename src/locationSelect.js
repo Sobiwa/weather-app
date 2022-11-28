@@ -12,16 +12,23 @@ async function findLocation() {
   const input = locInput.value;
   let middle;
   const apiKey = "&appid=921cfd876fc7bdd1768497c18dc1bf81";
+  let countryCode;
+  if (country.value) {
+    const shownVal = country.value;
+    countryCode = document.querySelector(`#countries option[value='${shownVal}']`).dataset.value;
+  }
   if (Number(input)) {
     if (country.value) {
-      middle = `zip?zip=${input},${country.value}`;
+      middle = `zip?zip=${input},${countryCode}`;
     } else {
       middle = `zip?zip=${input}`;
     }
   } else if (state.value) {
-    middle = `direct?q=${input},${state.value},${country.value}&limit=7`;
+    middle = `direct?q=${input},${state.value},${countryCode}&limit=7`;
+    console.log(middle);
   } else if (country.value) {
-    middle = `direct?q=${input},${country.value}&limit=7`;
+    middle = `direct?q=${input},${countryCode}&limit=7`;
+    console.log(middle);
   } else {
     middle = `direct?q=${input}&limit=7`;
   }

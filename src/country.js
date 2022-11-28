@@ -267,8 +267,9 @@ export const countryList = {
 for (const country in countryList) {
   if (Object.prototype.hasOwnProperty.call(countryList, country)) {
     const opt = document.createElement("option");
-    opt.setAttribute("value", country);
-    opt.innerText = countryList[country];
+    opt.setAttribute("value", countryList[country]);
+    opt.innerText = country;
+    opt.dataset.value = country;
     countries.appendChild(opt);
   }
 }

@@ -3,11 +3,11 @@
 import { isSameDay, parseISO, getDay, isToday, fromUnixTime, format } from "date-fns";
 
 export default async function retrieveWeatherData({ lat, lon }) {
-  // const fetchPrefix = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+  const unitsToggle = document.querySelector('#units-toggle');
   const data = {};
   const fetchPrefix = "https://api.openweathermap.org/data/2.5/";
   const middle = `lat=${lat}&lon=${lon}`;
-  const fetchSuffix = "&appid=921cfd876fc7bdd1768497c18dc1bf81&units=imperial";
+  const fetchSuffix = `&appid=921cfd876fc7bdd1768497c18dc1bf81&units=${unitsToggle.checked ? 'metric' : 'imperial'}`;
   const currentWeather = await fetch(
     `${fetchPrefix}/weather?${middle}${fetchSuffix}`
   );

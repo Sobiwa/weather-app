@@ -35,7 +35,7 @@ const gradientNight = document.createElement("div");
 gradientNight.classList.add("gradient", "night");
 const gradientNightCloud = document.createElement("div");
 gradientNightCloud.classList.add("gradient", "night-cloud");
-const siteWrapper = document.querySelector('.site-wrapper');
+const siteWrapper = document.querySelector(".site-wrapper");
 siteWrapper.append(
   gradientDay,
   gradientCloud,
@@ -163,6 +163,8 @@ function clearPage() {
 }
 
 function createMoreInfo(data) {
+  const unitsToggle = document.querySelector("#units-toggle");
+
   const list = document.createElement("ul");
 
   const feelsLike = document.createElement("li");
@@ -199,7 +201,9 @@ function createMoreInfo(data) {
   windText.innerText = "Wind";
   const windValue = document.createElement("span");
   // needs to change based on units
-  windValue.innerText = `${Math.floor(data.wind.speed)} mph`;
+  windValue.innerText = `${Math.floor(
+    unitsToggle.checked ? data.wind.speed * 3.6 : data.wind.speed
+  )} ${unitsToggle.checked ? "km/h" : "mph"}`;
   wind.append(windImg, windText, windValue);
 
   const sunrise = document.createElement("li");

@@ -1,5 +1,4 @@
-import fetchWeather from "./fetchWeather";
-import renderWeatherDetails from "./DOM";
+import getAndDisplayWeather from "./fetchWeather";
 import { countryList } from "./country";
 
 const locInput = document.querySelector("#loc");
@@ -15,7 +14,9 @@ async function findLocation() {
   let countryCode;
   if (country.value) {
     const shownVal = country.value;
-    countryCode = document.querySelector(`#countries option[value='${shownVal}']`).dataset.value;
+    countryCode = document.querySelector(
+      `#countries option[value='${shownVal}']`
+    ).dataset.value;
   }
   if (Number(input)) {
     if (country.value) {
@@ -25,21 +26,15 @@ async function findLocation() {
     }
   } else if (state.value) {
     middle = `direct?q=${input},${state.value},${countryCode}&limit=7`;
-    console.log(middle);
   } else if (country.value) {
     middle = `direct?q=${input},${countryCode}&limit=7`;
-    console.log(middle);
   } else {
     middle = `direct?q=${input}&limit=7`;
   }
 
   const locationListRequest = await fetch(`${prefix}${middle}${apiKey}`);
   const locationList = await locationListRequest.json();
-  console.log(locationList);
   return locationList;
-
-  // 'direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-  // 'zip?zip={zip code},{country code}&appid={API key}
 }
 
 function delay(ms) {
@@ -52,34 +47,31 @@ function createOptionBox(response) {
   }
   const box = document.createElement("div");
   box.classList.add("suggestion-box");
-  if (!Array.isArray(response)) {
-    response = [response];
-  }
+  // if (!Array.isArray(response)) {
+  //   response = [response];
+  // }
   if (!response.length) {
-    const noResults = document.createElement('div');
-    noResults.classList.add('loc-suggestion');
-    noResults.innerText = 'No results';
+    const noResults = document.createElement("div");
+    noResults.classList.add("loc-suggestion");
+    noResults.innerText = "No results";
     box.appendChild(noResults);
   } else {
-  response.forEach((sug) => {
-    const suggestion = document.createElement("button");
-    suggestion.setAttribute("type", "button");
-    suggestion.classList.add("loc-suggestion");
-    suggestion.innerText = `${sug.name}, ${
-      sug.state ?? countryList[sug.country]
-    }`;
-    suggestion.addEventListener("click", async () => {
-      const weatherData = await fetchWeather(sug);
-      weatherData.current.locationName = sug.name;
-      console.log(weatherData);
-      suggestionBox.removeChild(suggestionBox.firstChild);
-      locInput.value = '';
-      renderWeatherDetails(weatherData);
+    response.forEach((sug) => {
+      const suggestion = document.createElement("button");
+      suggestion.setAttribute("type", "button");
+      suggestion.classList.add("loc-suggestion");
+      suggestion.innerText = `${sug.name}, ${
+        sug.state ?? countryList[sug.country]
+      }`;
+      suggestion.addEventListener("click", async () => {
+        suggestionBox.removeChild(suggestionBox.firstChild);
+        locInput.value = "";
+        localStorage.setItem('location', JSON.stringify(sug));
+        getAndDisplayWeather(sug);
+      });
+      box.appendChild(suggestion);
     });
-    box.appendChild(suggestion);
-  
-  });
-}
+  }
 
   return box;
 }
@@ -93,7 +85,7 @@ async function delayAndSearch(value, wait) {
   }
 }
 
-function handleSearchInput () {
+function handleSearchInput() {
   if (!locInput.value) {
     if (suggestionBox.firstChild) {
       suggestionBox.removeChild(suggestionBox.firstChild);
@@ -105,10 +97,6 @@ function handleSearchInput () {
   } else {
     delayAndSearch(locInput.value, 2000);
   }
-
 }
-
-
-
 
 export { findLocation, handleSearchInput };

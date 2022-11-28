@@ -1,16 +1,27 @@
 import { handleSearchInput } from "./locationSelect";
+import getAndDisplayWeather from './fetchWeather';
+import { unitsToggle } from './settings';
 
 const locInput = document.querySelector("#loc");
-const locationInputForm = document.querySelector('.location-input');
 
 export default function init() {
+  if (localStorage.length) {
+    const location = JSON.parse(localStorage.getItem('location'));
+    const units = localStorage.getItem('units');
+    if (units === 'checked') {
+      unitsToggle.checked = true;
+    }
+    getAndDisplayWeather(location);
+  }
   locInput.addEventListener("input", () => {
     handleSearchInput();
   });
 
-  locationInputForm.addEventListener('click', () => {
-    locationInputForm.classList.remove('center')
-  }, { once: true })
+  locInput.addEventListener('keypress', (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  });
 
   window.addEventListener("resize", () => {
     const moreInfoList = document.querySelector(".more-info-list");

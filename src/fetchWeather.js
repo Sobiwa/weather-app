@@ -1,9 +1,12 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
 import { isSameDay, parseISO, getDay, isToday, fromUnixTime, format } from "date-fns";
+import renderWeatherDetails from './DOM';
 
-export default async function retrieveWeatherData({ lat, lon }) {
+async function retrieveWeatherData({ lat, lon }) {
+
   const unitsToggle = document.querySelector('#units-toggle');
+
   const data = {};
   const fetchPrefix = "https://api.openweathermap.org/data/2.5/";
   const middle = `lat=${lat}&lon=${lon}`;
@@ -20,6 +23,12 @@ export default async function retrieveWeatherData({ lat, lon }) {
   data.current.sunset = format(fromUnixTime(data.current.sys.sunset), 'p');
   data.forecast = analyzeForecast(data.fiveDay);
   return data;
+}
+
+async function getAndDisplayWeather(locInfo) {
+  const weatherData = await retrieveWeatherData(locInfo);
+  weatherData.current.locationName = locInfo.name;
+  renderWeatherDetails(weatherData);
 }
 
 function findMostCommon(array) {
@@ -123,3 +132,5 @@ function analyzeForecast(data) {
   }
   return fiveDayForecast;
 }
+
+export default getAndDisplayWeather;

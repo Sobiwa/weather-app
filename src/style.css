@@ -8,7 +8,6 @@
 
 :root {
   --settings-width: 300px;
-  --settings-height: min(900px, 100vh);
 
   --background: #282a36;
   --start-screen-bg: #6273a4f8;
@@ -277,12 +276,13 @@ ul {
 }
 
 .icon {
-  height: 80%;
+  height: 95%;
 }
 
 .forecast {
   margin-right: calc(100% - 100vw);
   grid-row: 3 / 4;
+  align-self: baseline;
 }
 
 .forecast-display {
@@ -319,7 +319,7 @@ ul {
   top: 0;
   background-color: rgba(232, 240, 254, 0.95);
   width: var(--settings-width);
-  height: var(--settings-height);
+  height: 100%;
   transition: 0.3s;
   color: var(--cloud-font);
   z-index: 1;
@@ -434,6 +434,7 @@ ul {
   font-size: 1rem;
   font-weight: 200;
   display: grid;
+  margin: 30px;
   grid-template-columns: repeat(6, 1fr);
   border-radius: 20px;
   max-height: 0;

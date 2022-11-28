@@ -1,5 +1,5 @@
-import countrySelect from './country.js';
-import stateSelect from './states.js';
+import countrySelect from './country';
+import stateSelect from './states';
 
 import closeIcon from './img/close-circle-outline.svg';
 
@@ -70,9 +70,18 @@ metric.classList.add('metric');
 metric.innerText = 'Metric';
 units.append(unitsLabel, imperial, unitsToggle, metric);
 
+unitsToggle.addEventListener('change', () => {
+  if (unitsToggle.checked) {
+    localStorage.setItem('units', 'checked');
+  } else {
+    localStorage.setItem('units', 'unchecked');
+  }
+})
+
 settingsList.append(units);
 settings.append(settingsTitle, settingsList);
 
 settingsForm.append(advancedSearch, settings);
 
 export default settingsForm;
+export { unitsToggle };

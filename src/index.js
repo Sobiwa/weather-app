@@ -1,4 +1,4 @@
-import './style.css';
 import init from './init';
+import './style.css';
 
 init();

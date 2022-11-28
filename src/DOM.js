@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax */
-import settings from "./settings.js";
+import settings from "./settings";
+
 import sun from "./img/sun.svg";
 import clearNight from "./img/clear-night.svg";
 import partialClouds from "./img/partial-clouds.svg";
